@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+
+
 
 const LoginPage = () => {
+  const [credentials ,setCredentials] = useState<{
+  username: string;
+  password: string;
+}>({
+  username: '',
+  password: '',
+});
+
+  function onHandleform(e: React.FormEvent<HTMLFormElement>) {
+    alert("red")
+    e.preventDefault();
+    alert(
+      "Username: " +
+        credentials.username +
+        "\nPassword: " +
+        credentials.password
+    );
+  }
   return (
     <div>
  <section className="vh-100">
@@ -15,7 +36,7 @@ const LoginPage = () => {
           </div>
 
           <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-            <form>
+            <form onSubmit={onHandleform}>
               <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p className="lead fw-normal mb-0 me-3">Sign in with</p>
 
@@ -43,6 +64,8 @@ const LoginPage = () => {
                   id="form3Example3"
                   className="form-control form-control-lg"
                   placeholder="Enter a valid email address"
+                  value={credentials.username}
+                  onChange={(e) =>setCredentials(prev =>({...prev,username: e.target.value}))}
                 />
                 <label className="form-label" htmlFor="form3Example3">
                   Email address
@@ -56,6 +79,8 @@ const LoginPage = () => {
                   id="form3Example4"
                   className="form-control form-control-lg"
                   placeholder="Enter password"
+                  value={credentials.password}
+                   onChange={(e) =>setCredentials(prev =>({...prev,password: e.target.value}))}
                 />
                 <label className="form-label" htmlFor="form3Example4">
                   Password
@@ -75,7 +100,12 @@ const LoginPage = () => {
               </div>
 
               <div className="text-center text-lg-start mt-4 pt-2">
-                <button type="button" className="btn btn-primary btn-lg" style={{ padding: "0.75rem 2.5rem" }}>
+                <button 
+                type="submit" 
+                className="btn btn-primary btn-lg" 
+                style={{ padding: "0.75rem 2.5rem" }}
+                
+                >
                   Login
                 </button>
 
@@ -90,28 +120,6 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-
-      {/* footer */}
-      {/* <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-        <div className="text-white mb-3 mb-md-0">Copyright © 2020.
-          All rights reserved.
-        </div>
-
-        <div>
-          <a href="#!" className="text-white me-4">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#!" className="text-white me-4">
-            <i className="fab fa-twitter" />
-          </a>
-          <a href="#!" className="text-white me-4">
-            <i className="fab fa-google" />
-          </a>
-          <a href="#!" className="text-white">
-            <i className="fab fa-linkedin-in" />
-          </a>
-        </div>
-      </div> */}
     </section>
     </div>
   );
